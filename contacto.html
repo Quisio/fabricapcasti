@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Fabrica Primitivo Castiñeira</title>
+    <link rel="shortcut icon" href="./recursos/imagenes/logo p-cas.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./recursos/css/index.css">
+    <script type="module" src="./recursos/javascript/visual.js"></script>
+</head>
+
+<body>
+
+    <header class="cabecera-principal">
+        <a href="./index.html"> <img src="./recursos/imagenes/logo p-cas.png"
+                alt="logo Fabrica de calzado primitivo castiñeira">
+        </a>
+
+        <img src="./recursos/imagenes/simbolo-menu.png" class="menu-icono" alt="Menú">
+
+        <nav>
+            <ul>
+                <li><a href="./index.html">INICIO</a></li>
+                <li><a href="./empresa.html">EMPRESA</a></li>
+                <li><a href="./contacto.html">CONTACTO</a></li>
+                <li><a href="./otros-servicios.html">OTROS SERVICIOS</a></li>
+                <li><a href="./tienda.html">TIENDA</a></li>
+                <li>
+                    <a href="./carrito.html" class="carrito-link">
+                        CARRITO
+                        <img src="./recursos/imagenes/carrito-de-compras.png" class="icono-carrito" alt="imagen carro">
+                        <span id="contadorCarrito" class="contador-carrito">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenido-principal">
+        <h1>
+            Contacto
+        </h1>
+        <form action="./contacto.html" method="post">
+            <label for="nombre"> Nombre
+                <input type="text" name="nombre" id="nombre" required>
+            </label>
+
+            <label for="apellido"> Apellido
+                <input type="text" name="apellido" id="apellido" required>
+            </label>
+            <br>
+            <label for="telefono"> Telefono
+
+                <input type="number" name="telefono" id="telefono" required>
+            </label>
+
+            <label for="e-mail"> E-mail
+                <input type="email" name="email" id="e-mail" required>
+            </label>
+            <br>
+            <label for="Mensaje"> Mensaje
+
+                <textarea cols="50" rows="10" name="" id="Mensaje" required></textarea>
+
+            </label>
+
+            <input type="submit" value="Enviar">
+
+        </form>
+
+    </main>
+
+
+    <footer class="pie-principal">
+        <p>&copy; 2025 Fábrica Primitivo Castiñeira</p>
+        <address>
+            <ul>
+                <li>Direccion: <a href="https://maps.app.goo.gl/M81pGtBV7BbdY9rN8" target="_blank"> <img
+                            src="./recursos/imagenes/ubicacion-del-mapa.png" alt="logo de ubicacion " class="logo-red">
+                        Corrientes
+                        1871/1877- Cordoba - Argentina</a> </li>
+                <li>WhatsApp <a href="https://wa.me/5493516502531" target="_blank"> <img
+                            src="./recursos/imagenes/whatsapp.png" class="logo-red" alt="imagen de whatsapp"></a> </li>
+            </ul>
+        </address>
+    </footer>
+
+</body>
+
+</html>

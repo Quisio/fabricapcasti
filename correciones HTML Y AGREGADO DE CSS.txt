@@ -1,0 +1,23 @@
+Cambios realizados en base a la ultima correcion
+
+Se corrijio el header que estaba diferente en las paginas.
+Se borro un <ul> que estaba de mas.
+Se ordeno el <nav> con un <ul> para que quede mas ordenado.
+Se cambio el footer para poner un <adress> para darle mas semantica a la pagina.
+Se borraron algunos <br> mal puestos.
+Se arreglaron algunos <article> con <section> internos.
+Se lleno el tbody para probar con css Y JSCRIPT
+
+Agregado de CSS
+
+Se uso el box sizing para dar el modelo de caja.
+Se aplico scroll-behavior para darle un desplazamiento Suave.
+Se aplico en el body una familia de letras clasicas como Georgia, Times New Roman.
+Se busco poner las letras en blanco en los titulos y de fondo
+Se le dio formato a los diferentes componentes del header (imagenes, anclas y menu navegador)
+Igual para el main, se dio formato a las diferentes partes que lo componen como en el footer.
+
+
+Se busco hacer un diseño responsivo para adecuarse a celular y achicar las imagenes para 
+una mejor optimizacion de la pagina.
+
