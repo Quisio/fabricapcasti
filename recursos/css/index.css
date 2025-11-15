@@ -131,7 +131,7 @@ h2 {
 }
 
 .contenido-principal a {
-  color: #900;
+  color: #f5f5f5;
   text-decoration: none;
 }
 
@@ -190,7 +190,7 @@ h2 {
 form {
   max-width: 600px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: rgb(161, 157, 157);
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -200,6 +200,7 @@ form label {
   display: block;
   margin-bottom: 10px;
   font-weight: bold;
+  color: #fff;
 }
 /* Espacio entre etiqueta y campo */
 form input,
@@ -258,8 +259,8 @@ form textarea {
    - overflow: hidden: oculta cualquier contenido que se salga de los bordes
    - transition: anima los cambios de transform y box-shadow */
 .producto {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #900;
+  border: 1px solid rgb(8, 8, 8);
   border-radius: 8px;
   text-align: center;
   padding: 15px;
@@ -269,11 +270,162 @@ form textarea {
   overflow: hidden;
 }
 
+/* ------------------------------
+  ZOOM DE IMÁGENES - EFECTO HOVER
+------------------------------ */
+
 /* Contenedor de la imagen del producto
-   - Agrupa la imagen para aplicar efectos sin afectar otros elementos */
+   - position: relative: permite posicionar elementos hijos de forma absoluta (el overlay)
+   - cursor: pointer: muestra manita para indicar que es clickeable
+   - margin-bottom: espacio debajo del contenedor */
 .producto-imagen-container {
   position: relative;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Overlay (capa) oscuro que aparece al pasar el mouse sobre la imagen
+   - position: absolute: se posiciona sobre la imagen (encima)
+   - top, left, right, bottom: 0 = cubre toda el área del contenedor padre
+   - background-color: rgba(0, 0, 0, 0.5) = negro con 50% de transparencia
+   - display: flex + justify-content + align-items: centra el icono de lupa
+   - opacity: 0: invisible por defecto (aparece con hover)
+   - transition: anima el cambio de opacidad en 0.3 segundos
+   - pointer-events: none: permite hacer clic a través del overlay (no bloquea clicks) */
+.zoom-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+/* Icono de lupa (🔍) que aparece en el overlay
+   - font-size: 2.5rem: tamaño grande (2.5 veces el tamaño base)
+   - color: white: color blanco para contrastar con el fondo oscuro
+   - text-shadow: sombra para mejorar legibilidad */
+.zoom-icon {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Mostrar overlay al pasar mouse sobre el contenedor
+   - opacity: 1: hace visible el overlay (transición suave de 0 a 1) */
+.producto-imagen-container:hover .zoom-overlay {
+  opacity: 1;
+}
+
+/* Cursor pointer en imágenes clicables
+   - cursor: pointer: muestra manita al pasar sobre la imagen */
+.producto-img-zoom {
+  cursor: pointer;
+}
+
+/* ------------------------------
+  MODAL DE ZOOM - VENTANA EMERGENTE
+------------------------------ */
+
+/* Modal (ventana) para mostrar imagen ampliada
+   - display: none: oculto por defecto (se muestra con clase .active)
+   - position: fixed: se fija en la pantalla (no se mueve al hacer scroll)
+   - z-index: 9999: aparece por encima de todo el contenido
+   - left, top: 0 + width, height: 100% = ocupa toda la pantalla
+   - background-color: rgba(0, 0, 0, 0.9) = fondo negro con 90% opacidad
+   - justify-content + align-items: centra la imagen en la pantalla
+   - animation: fadeIn = aparece con efecto fade (definido abajo) */
+.modal-zoom {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal activo (visible)
+   - display: flex: muestra el modal y activa flexbox para centrar contenido */
+.modal-zoom.active {
+  display: flex;
+}
+
+/* Imagen ampliada dentro del modal
+   - max-width: 90%: máximo 90% del ancho de la pantalla
+   - max-height: 90%: máximo 90% del alto de la pantalla
+   - object-fit: contain: ajusta la imagen sin deformarla ni recortarla
+   - border-radius: bordes redondeados
+   - box-shadow: sombra pronunciada para destacar la imagen
+   - animation: zoomIn = aparece con efecto de zoom (definido abajo) */
+.modal-zoom img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  animation: zoomIn 0.3s ease;
+}
+
+/* Botón X para cerrar el modal
+   - position: absolute: se posiciona en la esquina superior derecha
+   - top: 20px, right: 40px: ubicación exacta
+   - font-size: 3rem: tamaño grande para fácil click
+   - cursor: pointer: indica que es clickeable
+   - transition: anima el cambio de tamaño */
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* Efecto hover en el botón de cerrar
+   - scale(1.2): agranda el botón 20% para feedback visual */
+.modal-close:hover {
+  transform: scale(1.2);
+}
+
+/* ------------------------------
+  ANIMACIONES DEL MODAL
+------------------------------ */
+
+/* Animación fadeIn: aparece gradualmente
+   - from: opacity 0 (invisible)
+   - to: opacity 1 (visible)
+   - Duración: 0.3s (definida en .modal-zoom) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Animación zoomIn: aparece con efecto de zoom
+   - from: escala 0.8 (80% del tamaño) + invisible
+   - to: escala 1 (100% del tamaño) + visible
+   - Crea efecto de "acercamiento" al abrir la imagen */
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Estilos de la imagen del producto
@@ -282,8 +434,8 @@ form textarea {
    - transition: anima el efecto de zoom al hacer hover */
 .producto img {
   width: 100%;
-  max-width: 140px;
-  height: 140px;
+  max-width: 180px;
+  height: 180px;
   object-fit: contain;
   border-radius: 5px;
   margin: 0 auto 10px;
@@ -313,7 +465,7 @@ form textarea {
 .producto h3 {
   font-size: 1rem;
   margin: 10px 0;
-  color: #333;
+  color: #fff;
   background-color: transparent;
   padding: 0;
 }
@@ -321,7 +473,7 @@ form textarea {
 /* Precio del producto - destacado en rojo */
 .precio {
   font-weight: bold;
-  color: #900;
+  color: #fff;
   font-size: 1.2rem;
   margin: 10px 0;
 }
@@ -362,7 +514,7 @@ form textarea {
   font-weight: bold;
   margin-top: 8px;
   margin-bottom: 4px;
-  color: #555;
+  color: #fff;
   text-align: left;
 }
 
@@ -397,8 +549,8 @@ form textarea {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: #900;
-  color: #fff;
+  background-color: #fff;
+  color: #900;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -411,7 +563,7 @@ form textarea {
    - background-color: #b00: rojo más claro
    - scale(1.02): agranda ligeramente el botón (2%) */
 .btn-agregar:hover {
-  background-color: #b00;
+  background-color: #f3d174;
   transform: scale(1.02);
 }
 
@@ -446,9 +598,10 @@ form textarea {
 
 .redes-sociales .logo-red {
   width: 30px;
-  height: auto;
+  height: 30px;
   vertical-align: middle;
   margin-right: 5px;
+  display: inline-block;
 }
 
 /* Contenedor para centrar los botones */
