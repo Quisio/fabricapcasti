@@ -22,7 +22,7 @@ document.addEventListener('click', (e) => {
       return;
     }
 
-      //validad si tiene punteras.
+      //valida si tiene punteras.
     if (producto.punteras && puntera === "") {
       alert("Por favor seleccioná el tipo de puntera.");
       return;
@@ -53,6 +53,7 @@ function agregarAlCarrito(producto) {
     item.puntera === producto.puntera
   );
 
+  //agrega cantidad si existe.
   if (existente) {
     existente.cantidad += 1;
   } else {
