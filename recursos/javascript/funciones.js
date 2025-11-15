@@ -26,7 +26,10 @@ export function renderizarTiendaCalzado(calzado) {
     html += `
       <article class="producto tienda-productos">
         <div class="producto-imagen-container">
-          <img src="${producto.imagen}" alt="${producto.nombre}">
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-img-zoom" data-src="${producto.imagen}">
+          <div class="zoom-overlay">
+            <span class="zoom-icon">🔍</span>
+          </div>
         </div>
         <h2>${producto.nombre}</h2>
         <p class="precio">$${producto.precio.toLocaleString("es-AR")}</p>
