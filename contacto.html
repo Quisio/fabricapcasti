@@ -41,7 +41,9 @@
         <h1>
             Contacto
         </h1>
-        <form action="./contacto.html" method="post">
+
+        <!-- Formulario de contacto, enviado a formspree, pagina gratis para enviar formularios--> 
+        <form action="https://formspree.io/f/xkgkjyde" method="POST">
             <label for="nombre"> Nombre
                 <input type="text" name="nombre" id="nombre" required>
             </label>
@@ -51,18 +53,15 @@
             </label>
             <br>
             <label for="telefono"> Telefono
-
-                <input type="number" name="telefono" id="telefono" required>
+                <input type="tel" name="telefono" id="telefono" required>
             </label>
 
             <label for="e-mail"> E-mail
                 <input type="email" name="email" id="e-mail" required>
             </label>
             <br>
-            <label for="Mensaje"> Mensaje
-
-                <textarea cols="50" rows="10" name="" id="Mensaje" required></textarea>
-
+            <label for="mensaje"> Mensaje
+                <textarea cols="50" rows="10" name="mensaje" id="mensaje" required></textarea>
             </label>
 
             <input type="submit" value="Enviar">
