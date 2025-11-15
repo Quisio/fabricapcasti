@@ -11,7 +11,88 @@ function actualizarContadorCarrito() {
 // 🚀 Ejecutar automáticamente cuando se carga la página
 document.addEventListener("DOMContentLoaded", actualizarContadorCarrito);
 
-// 🍔 Menú hamburguesa - Mostrar/Ocultar menú en móviles
+// 🔍 MODAL DE ZOOM PARA IMÁGENES DE PRODUCTOS
+// Este código crea una ventana emergente que muestra las imágenes ampliadas
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // Verificar si el modal ya existe para no crearlo dos veces
+  if (!document.querySelector(".modal-zoom")) {
+    
+    // 1️⃣ CREAR EL MODAL DINÁMICAMENTE
+    // createElement: crea un nuevo elemento HTML <div>
+    const modal = document.createElement("div");
+    modal.className = "modal-zoom"; // Asigna la clase CSS
+    
+    // innerHTML: define el contenido HTML del modal
+    // &times; = símbolo X para cerrar
+    // <img> vacía que luego se llenará con la imagen clickeada
+    modal.innerHTML = `
+      <span class="modal-close">&times;</span>
+      <img src="" alt="Imagen ampliada">
+    `;
+    
+    // appendChild: agrega el modal al final del <body>
+    document.body.appendChild(modal);
+
+    // 2️⃣ OBTENER REFERENCIAS A LOS ELEMENTOS DEL MODAL
+    // modalImg: la imagen que se mostrará ampliada
+    // closeBtn: el botón X para cerrar
+    const modalImg = modal.querySelector("img");
+    const closeBtn = modal.querySelector(".modal-close");
+
+    // 3️⃣ ABRIR MODAL AL HACER CLIC EN IMÁGENES DE PRODUCTOS
+    // addEventListener: escucha todos los clicks en el documento
+    document.addEventListener("click", (e) => {
+      // Verifica si el elemento clickeado tiene la clase "producto-img-zoom"
+      if (e.target.classList.contains("producto-img-zoom")) {
+        // dataset.src: obtiene el atributo data-src de la imagen
+        // || e.target.src: si no existe data-src, usa el src normal
+        const imgSrc = e.target.dataset.src || e.target.src;
+        
+        // Asigna la imagen al modal
+        modalImg.src = imgSrc;
+        
+        // classList.add("active"): muestra el modal (display: flex)
+        modal.classList.add("active");
+        
+        // Evita que el usuario haga scroll mientras el modal está abierto
+        document.body.style.overflow = "hidden";
+      }
+    });
+
+    // 4️⃣ CERRAR MODAL AL HACER CLIC EN LA X
+    closeBtn.addEventListener("click", () => {
+      // classList.remove("active"): oculta el modal (display: none)
+      modal.classList.remove("active");
+      
+      // Restaura el scroll de la página
+      document.body.style.overflow = "";
+    });
+
+    // 5️⃣ CERRAR MODAL AL HACER CLIC FUERA DE LA IMAGEN
+    // (en el fondo oscuro)
+    modal.addEventListener("click", (e) => {
+      // e.target === modal: verifica que el click fue en el fondo, no en la imagen
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+    });
+
+    // 6️⃣ CERRAR MODAL CON LA TECLA ESCAPE (ESC)
+    // keydown: detecta cuando se presiona una tecla
+    document.addEventListener("keydown", (e) => {
+      // e.key === "Escape": verifica si la tecla es ESC
+      // && modal.classList.contains("active"): verifica que el modal esté abierto
+      if (e.key === "Escape" && modal.classList.contains("active")) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+    });
+  }
+});
+
+// 🝔 Menú hamburguesa - Mostrar/Ocultar menú en móviles
 document.addEventListener("DOMContentLoaded", () => {
   const menuIcono = document.querySelector(".menu-icono");
   const nav = document.querySelector(".cabecera-principal nav ul");
