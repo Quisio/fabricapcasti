@@ -1,7 +1,10 @@
 import { renderizarTiendaCalzado } from './funciones.js';
 import calzado from './calzado.js';
-
-renderizarTiendaCalzado(calzado);
+// Solo renderizar la tienda si el elemento existe (evita error en otras páginas)
+const contenedorTienda = document.getElementById("tienda-productos");
+if (contenedorTienda) {
+  renderizarTiendaCalzado(calzado);
+}
 
 // 2️⃣ Escuchamos clics en el botón “Agregar al carrito”
 document.addEventListener('click', (e) => {
@@ -76,3 +79,4 @@ function actualizarContadorCarrito() {
 
 // 🟢 Llamamos al cargar la página
 document.addEventListener("DOMContentLoaded", actualizarContadorCarrito);
+
